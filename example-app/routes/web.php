@@ -24,12 +24,12 @@ Route::get('/about', function () {
    // $name = 'rima';
    // $age = 21;
   //  $tasks = ['task 1','task 2 ', 'task3'];
-  $tasks =['1'=>'task 1','2' => 'task 2' ,'3'=>'task3'];
+  //$tasks =['1'=>'task 1','2' => 'task 2' ,'3'=>'task3'];
 
    // return view('about' ,['name'=> $name , 'age' =>$age ]);
   // return view('about' ) -> with('name', $name ) -> with ('age' ,$age );
   // return view ('about',compact('name','age'));
-  return view ('about',compact('tasks'));
+  //return view ('about',compact('tasks'));
 
 });
 
@@ -69,20 +69,14 @@ Route::get('/tasks', function () {
 
  });
 
- Route::post('app', function () {
+ Route::get('app', function () {
 
 
 
         return view('layout.app');
     });
 
-    // الابن
-    Route::post('app1', function () {
 
-
-
-        return view('lay');
-    });
 
     Route :: get('control',function(){
         $pro = DB :: table('products') -> get();
@@ -95,8 +89,8 @@ Route::get('/tasks', function () {
 
             return view('show2',compact('pro2'));
     });
-Route::get('/about' ,[ProductsController::class,'index']);
-Route::get('/about/{id}',[ProductsController::class,'show']);
-
+Route::get('/about' ,[ProductsController::class,'index'])-> name('task.index');
+Route::get('/about/{id}',[ProductsController::class,'show'])-> name('task.show');
+Route::post('/stor',[ProductsController::class,'stor'])-> name('task.stor');
 
 

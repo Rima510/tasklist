@@ -30,6 +30,15 @@ class ProductsController extends Controller
 
 
     }
+    public function stor(){
+
+         DB:: table('products')-> insert(['name'=>$_POST['name']]);
+        return redirect() -> back() ;
+
+
+    }
+
+
     // public function send_name(){
     //     $name = $_REQUEST['name'];
     //     return view('dbtask',compact('name'));

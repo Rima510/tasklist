@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <body>
 
@@ -11,4 +11,4 @@
  @endforeach
 
 </body>
-</html>
+</html> -->
