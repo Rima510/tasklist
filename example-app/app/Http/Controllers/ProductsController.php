@@ -1,52 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\support\Facades\DB;
-class ProductsController extends Controller
-{
+class ProductsController extends Controller {
+
     public function index(){
+       // $tasks = [ 'task_1' => 'Make ur assignment',
+       //            'task_2' => 'Check ur phone',
+       //            'task_3' => 'Watch a movie'];
 
-       // $tasks =[
+       //$tasks = DB :: table('tasks') ->where('name','like','%Task 1%')-> get();
+       //$tasks = DB :: table('tasks') ->where('created_at','2022-04-05')-> get();
+       $tasks = DB :: table('products') -> get();
 
-
-          //  'task 1'=>'Make your assignment',
-           // 'task 2' => 'check your phone' ,
-           // 'task 3'=>'watch a match'
-       // ];
-        $tasks = DB:: table('products')->where('name','like','product%')->get();
-        return view('dbtask' , compact('tasks')) ;
+        return view('tasks',compact('tasks'));
 
     }
 
     public function show($id){
-
-        $task = DB:: table('products')->find($id);
-        return view('dbtask1' , compact('task')) ;
-
-
-    }
-    public function stor(){
-
-         DB:: table('products')-> insert(['name'=>$_POST['name']]);
-        return redirect() -> back() ;
-
-
+        $task = DB::table('products') -> find($id) ;
+        return view('show',compact('task'));
     }
 
 
-    // public function send_name(){
-    //     $name = $_REQUEST['name'];
-    //     return view('dbtask',compact('name'));
-    // }
+    public function store(){
+        DB::table ('products') -> insert(['name'=> $_POST['name']]);
+        return redirect() -> back();
 
-    // public function show_name(){
-    //     $name = 'Rima';
-    //     $age = 21;
-    //     return view('dbtask',compact('name','age'));
-    // }
+    }
+
+    public function delet($id){
+        DB::table ('products') -> where('id','=',$id)->delete();
+        return redirect() -> back();
+
+    }
+
+
+
 }

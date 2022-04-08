@@ -11,7 +11,7 @@
              <div class="panel-body">
                  <!-- Display Validation Errors -->
                  <!-- New Task Form -->
-                 <form action="/stor" method="POST" class="form-horizontal">
+                 <form action="/store" method="POST" class="form-horizontal">
 @csrf
                      <!-- Task Name -->
                      <div class="form-group">
@@ -43,17 +43,21 @@
                  <div class="panel-body">
                      <table class="table table-striped task-table">
                          <thead>
-                             <th>Task</th>
+                             <th>Products</th>
                              <th>&nbsp;</th>
                          </thead>
                          <tbody>
                              @foreach ($tasks as $task)
                              <tr>
+                                 <!-- اسم العمود الذي نريد طباعته -->
                                 <td class="table-text"><div>{{$task ->name}}</div></td>
+                                <td class="table-text"><div>{{$task ->id}}</div></td>
+
 
                                 <!-- Task Delete Button -->
                                 <td>
-                                    <form action="#" method="POST">
+                                    <form action="url{{('delete/'.$task ->id)}}" method="POST">
+                                    @csrf
                                         <button type="submit" class="btn btn-danger">
                                             <i class="fa fa-btn fa-trash"></i>Delete
                                         </button>
