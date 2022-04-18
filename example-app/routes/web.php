@@ -22,3 +22,7 @@ Route :: get ('/task/{id}',[ProductsController :: class ,'show'])-> name('task.s
 Route :: post ('/store',[ProductsController :: class ,'store']) -> name('task.store') ;
 Route :: post ('delete/{id}',[ProductsController :: class ,'delete'])  ;
 
+
+//Route::delete('task/destroy/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+Route::put('edit/{id}',[ProductsController::class, 'edit']);
+Route::patch('update/{id}',[ProductsController::class, 'update']);
