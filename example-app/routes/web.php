@@ -14,15 +14,15 @@ use App\Http\Controllers\productsController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 Route :: get ('/tasks',[ProductsController :: class ,'index']) -> name('task.index') ;
 Route :: get ('/task/{id}',[ProductsController :: class ,'show'])-> name('task.show') ;
-Route :: post ('/store',[ProductsController :: class ,'store']) -> name('task.store') ;
-Route :: post ('delete/{id}',[ProductsController :: class ,'delete'])  ;
+Route :: post ('/task/store',[ProductsController :: class ,'store']) -> name('task.store') ;
+Route :: Delete ('delete/{id}',[ProductsController :: class ,'delete']) -> name('task.delete')  ;
 
 
-//Route::delete('task/destroy/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-Route::put('edit/{id}',[ProductsController::class, 'edit']);
-Route::patch('update/{id}',[ProductsController::class, 'update']);
+
+Route::put('edit/{id}',[ProductsController::class, 'edit'])-> name('task.edit');
+Route::patch('update/{id}',[ProductsController::class, 'update'])-> name('task.update');

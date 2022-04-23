@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Task ;
+use App\Models\Product ;
 
 class ProductsController extends Controller {
 
@@ -17,8 +17,8 @@ class ProductsController extends Controller {
        //$tasks = DB :: table('products') -> get();
 
        // return view('tasks',compact('tasks'));
-       $tasks = Products::orderBy('name')->get()->all();
-       return view('tasks.index', compact('tasks'));
+       $tasks = Product::orderBy('name')->get()->all();
+       return view('tasks', compact('tasks'));
     }
 
     public function show($id){
@@ -52,7 +52,7 @@ class ProductsController extends Controller {
         $tasks = DB::table('products')->get();
         $task = DB::table('products')->find($id);
 
-        return view('tasks.index', compact('task', 'tasks'));
+        return view('/tasks', compact('task', 'tasks'));
     }
 
     public function update(Request $request, $id){

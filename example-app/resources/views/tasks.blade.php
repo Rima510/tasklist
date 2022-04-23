@@ -1,25 +1,18 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
-<div class="col-sm-offset-2 col-sm-8">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            New Task
-        </div>
 
-        <div class="panel-body">
-            <!-- Display Validation Errors -->
+<div class="container">
+    <div class="col-sm-offset-2 col-sm-8">
+        <div class="card card-default">
+            <div class="card-header">
+                New Task
+            </div>
 
-    @if ($errors->any())
-<   div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-    </div>
-    @endif
-@if (isset($task))
+            <div class="card-body">
+                <!-- Display Validation Errors -->
+                @if (isset($task))
                 <!-- Edit Task Form -->
+
                 <form action="{{url('update/'.$task->id)}}" method="POST" class="form-horizontal">
                     @csrf
                     @method('PATCH')
@@ -36,7 +29,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
-                                <i class="fa fa-btn fa-plus"></i>Update Task
+                                <i class="fa fa-pencil"></i> Update Task
                             </button>
                         </div>
                     </div>
@@ -44,7 +37,7 @@
 
                 @else
                 <!-- New Task Form -->
-                <form action="/task/store" method="POST" class="form-horizontal">
+                <form action="{{url('store')}}" method="POST" class="form-horizontal">
                     @csrf
                     <!-- Task Name -->
                     <div class="form-group">
@@ -80,17 +73,17 @@
                     <thead>
                         <th>Task</th>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
                     </thead>
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr>
-                            <td class="table-text"><div>{{$task->name}}</div></td>
+                            <td class="table-text">
+                                <div>{{$task->name}}</a></div>
+                            </td>
 
                             <!-- Task Delete Button -->
                             <td>
-                                <form action="/task/destroy/{{$task->id}}" method="POST">
+                                <form action="{{url('delete/'.$task->id)}}" method="POST">
                                     @csrf
                                     @method('Delete')
                                     <button type="submit" class="btn btn-danger">
@@ -99,11 +92,11 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="/edit/{{$task->id}}" method="POST">
+                                <form action="{{url('edit/'.$task->id)}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-trash"></i>Edit
+                                        <i class="fa fa-pencil-square-o"></i>  Edit
                                     </button>
                                 </form>
                             </td>
@@ -113,6 +106,6 @@
                 </table>
             </div>
         </div>
+    </div>
 </div>
-
 @endsection
