@@ -17,50 +17,72 @@ class ProductsController extends Controller {
        //$tasks = DB :: table('products') -> get();
 
        // return view('tasks',compact('tasks'));
-       $tasks = Product::orderBy('name')->get()->all();
-       return view('tasks', compact('tasks'));
+      // $tasks = Product::orderBy('name')->get()->all();
+      // return view('tasks', compact('tasks'));
+
+      $tasks = Product :: all()->sortBy("name");
+        //dd($tasks);
+        return view('tasks',compact('tasks'));
     }
 
     public function show($id){
-        $task = DB::table('products') -> find($id) ;
+       // $task = DB::table('products') -> find($id) ;
+       // return view('show',compact('task'));
+
+       $task = Product :: find($id);
         return view('show',compact('task'));
     }
 
 
-    public function store(){
-       DB::table ('products') -> insert(['name'=> $_POST['name']]);
+    public function store(Request $request){
+      // DB::table ('products') -> insert(['name'=> $_POST['name']]);
+      // return redirect() -> back();
+
+      $task = new Product();
+      $task->name = $request->name;
+      $task-> created_at = now();
+      $task ->updated_at = now();
+      $task -> save();
+
        return redirect() -> back();
-    //   $validated = $request->validate([
-    //     'name' => 'required|min:3|max:15'
-    // ]);
-    //   $task = new Task();
-    //   $task->name = $request->name;
-    //   $task->save();
+
+   }
+
+   public function delete($id){
+       $task = Product :: find($id);
+       $task -> delete();
+       return redirect() -> back();
+
+    }
+
+    // public function delet($id){
+    //     DB::table ('products') -> where('id','=',$id)->delete();
     //     return redirect() -> back();
 
-    // }}
-    }
-
-    public function delet($id){
-        DB::table ('products') -> where('id','=',$id)->delete();
-        return redirect() -> back();
-
-    }
+    // }
 
 
     public function edit($id){
-        $tasks = DB::table('products')->get();
-        $task = DB::table('products')->find($id);
+        // $tasks = DB::table('products')->get();
+        // $task = DB::table('products')->find($id);
+
+        // return view('/tasks', compact('task', 'tasks'));
+
+        $tasks = Product :: all()->sortBy("name");
+        $task = Product :: find($id);
 
         return view('/tasks', compact('task', 'tasks'));
     }
 
     public function update(Request $request, $id){
-        $task = DB::table('products')->where('id',$id)->update([
-            'name' => $request->name
-        ]);
+        // $task = DB::table('products')->where('id',$id)->update([
+        //     'name' => $request->name
+        // ]);
 
-        return redirect('');
+        // return redirect('');
+
+        $task = Product :: where('id',$id)->update(['name' => $request->name]);
+        return redirect('/');
     }
 
 

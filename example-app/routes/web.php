@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
