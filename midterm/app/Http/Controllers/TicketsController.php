@@ -19,7 +19,7 @@ class TicketsController extends Controller {
 
 
        $task = Ticket :: find($id);
-        return view('showtickets',compact('task'));
+        return view('tickets',compact('task'));
     }
 
 
